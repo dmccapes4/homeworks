@@ -1,6 +1,4 @@
 class Stack
-  attr_reader :stack
-
   def initialize
     @stack = []
   end
@@ -14,6 +12,6 @@ class Stack
   end
 
   def show
-    @stack
+    @stack.first
   end
 end

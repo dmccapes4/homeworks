@@ -1,6 +1,4 @@
 class Queue
-  attr_reader :queue
-
   def initialize
     @queue = []
   end
@@ -14,6 +12,6 @@ class Queue
   end
 
   def show
-    @queue
+    @queue.last
   end
 end

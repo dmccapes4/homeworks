@@ -6,8 +6,6 @@ end
 
 
 class Map
-  attr_reader :map
-
   def initialize
     @map = []
   end
