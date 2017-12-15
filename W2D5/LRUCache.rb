@@ -1,3 +1,5 @@
+require 'byebug'
+
 class LRUCache
     def initialize(el)
       @list = LinkedList.new(Node.new(el))
@@ -39,8 +41,10 @@ class LRUCache
     attr_accessor :start_node, :end_node
 
     def initialize(node = nil)
+      @hash = {}
       @start_node = node
       @end_node = node
+      @length = node.nil? ? 0 : 1
     end
 
     def append(el)
@@ -49,6 +53,8 @@ class LRUCache
       node.next_node = nil
       node.prev_node = @end_node
       @end_node = node
+      @hash[el] = node
+      @length += 1
     end
 
     def prepend(el)
@@ -57,30 +63,24 @@ class LRUCache
       node.next_node = @start_node
       node.prev_node = nil
       @start_node = node
+      @hash[el] = node
+      @length += 1
     end
 
     def find(el)
-      node = @start_node
-      until node.next_node.nil?
-        return node if node.el == el
-        node = node.next_node
-      end
-      false
+      return false unless @hash[el]
+      @hash[el]
     end
 
     def length
-      out = 0
-      node = @start_node
-      until node.next_node.nil?
-        out += 1
-        node = node.next_node
-      end
-      out
+      @length
     end
 
     def pop
       @end_node = @end_node.prev_node
       @end_node.next_node = nil
+      @hash[@end_node.el] = nil
+      @length -= 1
     end
 
     def display
@@ -106,3 +106,24 @@ class LRUCache
       @el
     end
   end
+
+
+  johnny_cache = LRUCache.new(4)
+
+  johnny_cache.add("I walk the line")
+  johnny_cache.add(5)
+
+  johnny_cache.count # => returns 2
+
+  johnny_cache.add([1,2,3])
+  johnny_cache.add(5)
+  johnny_cache.add(-5)
+  johnny_cache.add({a: 1, b: 2, c: 3})
+  johnny_cache.add([1,2,3,4])
+  johnny_cache.add("I walk the line")
+  johnny_cache.add(:ring_of_fire)
+  johnny_cache.add("I walk the line")
+  johnny_cache.add({a: 1, b: 2, c: 3})
+
+
+  johnny_cache.show # => prints [[1, 2, 3, 4], :ring_of_fire, "I walk the line", {:a=>1, :b=>2, :c=>3}]
