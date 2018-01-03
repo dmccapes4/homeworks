@@ -4,7 +4,7 @@
   margin: 0 auto;
   background: white;
   width: 900px;
-  
+
 }
 
 .content-sidebar {
@@ -20,9 +20,11 @@
 }
 
 .content h1 {
-
+  font-size: 24px;
+  font-weight: 700;
+  padding: 20px;
 }
 
 .content p {
-
+  font-weight: 400;
 }
