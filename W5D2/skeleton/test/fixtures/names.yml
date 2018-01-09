@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  toyable_id: 1
-  toyable_type: MyString
-
-two:
-  toyable_id: 1
-  toyable_type: MyString
